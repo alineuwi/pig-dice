@@ -48,9 +48,15 @@ function holdThePig() {
 
 function switchPlayer () {
   if (pigGame.playerUp === 1) {
+    $("#player1Button").hide();
+    $("#player2Button").show();
     pigGame.playerUp = 2;
+
   } else {
+    $("#player2Button").hide();
+    $("#player1Button").show();
     pigGame.playerUp = 1;
+
   }
 }
 
@@ -68,7 +74,7 @@ function resetGame() {
 
 function alertEndTurn(){
   alert("Sorry - you rolled a 1.  Your score remains the same and your turn is over.");
-  $("#playerStatus").text(pigGame.playerUp);
+  $(".playerStatus").text(pigGame.playerUp);
 }
 
 function alertWinner(playerNumber) {
@@ -84,23 +90,27 @@ $(document).ready(function() {
     var playerName2 = $("input#playerName2").val();
       $("span#playerName1").text(playerName1);
       $("span#playerName2").text(playerName2);
+      $("#player2Button").hide();
+      $("#player1Button").show();
+      $(".playerStatus").text(pigGame.playerUp);
       event.preventDefault();
 
     var nameHolder = new Names(playerName1, playerName2);
   })
 
 
-  $("#rollPig").click(function() {
+  $(".rollPig").click(function() {
     pigResult = playerRoll();
-    $("#rollResult").text(pigResult);
-    $("#turnScore").text(pigGame.turnScore);
+    $(".rollResult").text(pigResult);
+    $(".turnScore").text(pigGame.turnScore);
+
   });
 
-  $("#holdPig").click(function(){
+  $(".holdPig").click(function(){
     holdThePig();
     $("rollResult").text("");
-    $("#player1Score").text(pigGame.player1Score);
-    $("#player2Score").text(pigGame.player2Score);
-    $("#playerStatus").text(pigGame.playerUp);
+    $(".player1Score").text(pigGame.player1Score);
+    $(".player2Score").text(pigGame.player2Score);
+    $(".playerStatus").text(pigGame.playerUp);
   });
 });
