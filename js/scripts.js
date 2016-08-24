@@ -1,3 +1,8 @@
+function Names(name1, name2) {
+  this.name1 = name1;
+  this.name2 = name2;
+}
+
 var pigGame = {
   player1Score: 0,
   player2Score: 0,
@@ -14,15 +19,15 @@ var playerRoll = function() {
   var roll = dieRoll();
   if(roll ===1){
     pigGame.turnScore = 0;
-    notifyEndTurn();
+    alertEndTurn();
     switchPlayer();
   } else {
     pigGame.turnScore +=roll;
     if (pigGame.playerUp === 1) {
-      if (pigGame.turnScore + pigGame.player1Score >= 49.345) {
+      if (pigGame.turnScore + pigGame.player1Score >= 10) {
         alertWinner(1);
       }
-    } else if (pigGame.turnScore + pigGame.player2Score >= 49.345) {
+    } else if (pigGame.turnScore + pigGame.player2Score >= 10) {
       alertWinner(2);
   }
   }
@@ -40,9 +45,6 @@ function holdThePig() {
   switchPlayer();
 }
 
-function notifyEndTurn() {
-  alert("End of your turn.")
-}
 
 function switchPlayer () {
   if (pigGame.playerUp === 1) {
@@ -76,6 +78,18 @@ function alertWinner(playerNumber) {
 }
 
 $(document).ready(function() {
+
+  $("form#pigForm").submit(function(event){
+    var playerName1 = $("input#playerName1").val();
+    var playerName2 = $("input#playerName2").val();
+      $("span#playerName1").text(playerName1);
+      $("span#playerName2").text(playerName2);
+      event.preventDefault();
+
+    var nameHolder = new Names(playerName1, playerName2);
+  })
+
+
   $("#rollPig").click(function() {
     pigResult = playerRoll();
     $("#rollResult").text(pigResult);
