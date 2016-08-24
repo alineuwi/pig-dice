@@ -21,11 +21,19 @@
         </div>
         <button class="player-group" type="submit" name="button">Submit</button>
       </form>
+
       <br>
-      <div id="die1" class="dice">0
+      <div class="gameDisplay">
+        <h1>Player 1 Score: <span class="gameStatusDisplay" id="player1Score">0</span></h1>
+        <h1>Player 2 Score: <span class="gameStatusDisplay" id="player2Score">0</span></h1>
+
+        <h2>Player <span id="playerStatus"></span>'s Turn</h2>
+        <h2>Score for this Turn: <span id="turnScore" class="gameStatusDisplay"></span></h2>
+        <h2>Roll Result: <span id="rollResult" class="gameStatusDisplay"></span></h2>
+
+        <button type="button" class="btn btn-success btn-lg" id="rollPig">(Re)Roll for More Points!</button>
+        <button type="button" class="btn btn-primary btn-lg" id="holdPig">Stop rolling and keep points...</button>
       </div>
-      <button onclick="rollDice()">Roll Dice</button>
-      <h2 id="status" style="clear:left;"></h2>
     </div>
   </body>
 </html>

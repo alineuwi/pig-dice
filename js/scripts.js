@@ -40,6 +40,10 @@ function holdThePig() {
   switchPlayer();
 }
 
+function notifyEndTurn() {
+  alert("End of your turn.")
+}
+
 function switchPlayer () {
   if (pigGame.playerUp === 1) {
     pigGame.playerUp = 2;
@@ -78,7 +82,7 @@ $(document).ready(function() {
     $("#turnScore").text(pigGame.turnScore);
   });
 
-  $("holdPig").click(function(){
+  $("#holdPig").click(function(){
     holdThePig();
     $("rollResult").text("");
     $("#player1Score").text(pigGame.player1Score);
