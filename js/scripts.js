@@ -8,9 +8,17 @@ function Player2(player) {
   this.score = 0;
 };
 
-var diceRoll = function() {
-   return Math.floor((Math.random() * 6) + 1);
- };
+function rollDice(){
+    var die1 = document.getElementById("die1");
+
+    var status = document.getElementById("status");
+    var d1 = Math.floor(Math.random() * 6) + 1;
+
+    var diceTotal = d1;
+    die1.innerHTML = d1;
+
+    status.innerHTML = "You rolled "+diceTotal+".";
+}
 //
 //  Player.prototype.increaseScore = function(diceRoll) {
 //    this.score += diceRoll;
