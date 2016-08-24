@@ -19,71 +19,70 @@ var playerRoll = function() {
   } else {
     pigGame.turnScore +=roll;
     if (pigGame.playerUp === 1) {
-      if (pigGame.turnScore + pigGame.player1Score >= 50) {
+      if (pigGame.turnScore + pigGame.player1Score >= 49.345) {
         alertWinner(1);
       }
-    } else if (pigGame.turnScore + pigGame.player2Score >= 50) {
+    } else if (pigGame.turnScore + pigGame.player2Score >= 49.345) {
       alertWinner(2);
   }
   }
   return roll;
 }
 
+function holdThePig() {
+  var currentPlayer = pigGame.playerUp;
+  if (currentPlayer ===1) {
+    pigGame.player1Score += pigGame.turnScore;
+  } else {
+    pigGame.player2Score += pigGame.turnScore;
+  }
+  pigGame.turnScore = 0;
+  switchPlayer();
+}
+
+function switchPlayer () {
+  if (pigGame.playerUp === 1) {
+    pigGame.playerUp = 2;
+  } else {
+    pigGame.playerUp = 1;
+  }
+}
+
+function resetGame() {
+  pigGame.player1Score = 0;
+  pigGame.player2Score = 0;
+  pigGame.playerUp = 1;
+  pigGame.turnScore = 0;
+}
+
+// -----BUSINESS LOGIC --- (above) -----
+// ------------------------------------
+// ----USER LOGIC ---- (below)--------
 
 
+function alertEndTurn(){
+  alert("Sorry - you rolled a 1.  Your score remains the same and your turn is over.");
+  $("#playerStatus").text(pigGame.playerUp);
+}
 
-
-function Player1(player) {
-  this.playerName = player;
-  this.score = 0;
-};
-
-function Player2(player) {
-  this.playerName = player;
-  this.score = 0;
-};
-var diceNumberTemp = ("");
-
-// function rollDice(){
-//     var die1 = document.getElementById("die1");
-//
-//     var status = document.getElementById("status");
-//     var d1 = Math.floor(Math.random() * 6) + 1;
-//
-//     var diceTotal = d1;
-//     die1.innerHTML = d1;
-//
-//     status.innerHTML = "You rolled "+diceTotal+".";
-//
-//     diceNumberTemp.concat(d1);
-// }
-
-// function diceNumberTemp(index) {
-//   if (index=== 1){
-//     alert("your turn is over");
-//   }else{
-//     alert("plese roll again");
-//   }
-// };
-// alert(diceNumberTemp);
-// //
-//  Player.prototype.increaseScore = function(diceRoll) {
-//    this.score += diceRoll;
-// };
-
-
+function alertWinner(playerNumber) {
+  alert("Player " + playerNumber + " is the BIG winner!!");
+  resetGame();
+  $(".gameStatusDisplay").text(0);
+}
 
 $(document).ready(function() {
-  $("#pigForm").submit(function(event) {
-      event.preventDefault();
+  $("#rollPig").click(function() {
+    pigResult = playerRoll();
+    $("#rollResult").text(pigResult);
+    $("#turnScore").text(pigGame.turnScore);
+  });
 
-      var playerName1 = $("input#playerName1").val();
-      var playerName2 = $("input#playerName2").val();
-
-
-    var nameHolder1 = new Player1(playerName1);
-    var nameHolder2 = new Player2(playerName2);
-
-
+  $("holdPig").click(function(){
+    holdThePig();
+    $("rollResult").text("");
+    $("#player1Score").text(pigGame.player1Score);
+    $("#player2Score").text(pigGame.player2Score);
+    $("#playerStatus").text(pigGame.playerUp);
   });
 });
